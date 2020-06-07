@@ -1,0 +1,268 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion compileSdk_version
+    buildToolsVersion buildTools_version
+
+    defaultConfig {
+        minSdkVersion minSdk_version
+        targetSdkVersion targetSdk_version
+        versionCode version_code
+        versionName version_name
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+ext {
+    anko_version = "0.10.8"
+    /* -- begin JetPack -- */
+    lifecycle_version = "2.2.0"
+    room_version = "2.2.5"
+    work_version = "2.3.4"
+    navigation_version = "2.2.2"
+    paging_version = "2.1.2"
+    arch_version = "2.1.0"
+    /* -- end JetPack -- */
+}
+
+//noinspection SpellCheckingInspection
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    /**
+     * test
+     */
+    testImplementation "junit:junit:$test_junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$test_ext_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$test_espresso_version"
+
+
+    /**
+     * kotlin
+     */
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    // Des:kotlin反射包
+    api "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+
+    /**
+     * kotlin_anko
+     */
+    // Ps:anko-layout只依赖到support 27 会跟28有冲突.一般不写dsl,只用anko-commons库就行。所以不用引用全部的anko库
+    //    api "org.jetbrains.anko:anko:$anko_version"
+    // Des:anko优化的一些通用功能库
+    api "org.jetbrains.anko:anko-commons:$anko_version"
+
+
+    /**
+     *  androidx
+     */
+    // Ps:会自动导入"swiperefreshlayout:1.0.0"
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    api 'androidx.appcompat:appcompat:1.1.0'
+    api 'androidx.constraintlayout:constraintlayout:1.1.3'
+    api 'androidx.recyclerview:recyclerview:1.1.0'
+    //api 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    api 'androidx.viewpager2:viewpager2:1.0.0'
+    api 'com.google.android.material:material:1.1.0'
+
+    /* -- begin ktx ex JetPack-- */
+    api 'androidx.core:core-ktx:1.2.0'
+    api "androidx.collection:collection-ktx:1.1.0"
+    api 'androidx.fragment:fragment-ktx:1.2.4'
+    api "androidx.palette:palette-ktx:1.0.0"
+    api "androidx.sqlite:sqlite-ktx:2.1.0"
+    api 'com.google.android.play:core-ktx:1.7.0'
+    /* -- end ktx ex JetPack-- */
+
+    /* -- begin lifecycle -- */
+    api "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
+    // Des:Saved state module for ViewModel
+    api "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+    // Des:optional - helpers for implementing LifecycleOwner in a Service
+    api "androidx.lifecycle:lifecycle-service:$lifecycle_version"
+    // Des:optional - ProcessLifecycleOwner provides a lifecycle for the whole application process
+    api "androidx.lifecycle:lifecycle-process:$lifecycle_version"
+    // Des:Annotation processor
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    // Des:alternately - if using Java8, use the following instead of lifecycle-compiler
+    api "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+    // Des:optional - Test helpers for LiveData
+    //testImplementation "androidx.arch.core:core-testing:$arch_version"
+    /* -- end lifecycle -- */
+
+    /* -- begin room -- */
+    api "androidx.room:room-ktx:$room_version"
+    api "androidx.room:room-runtime:$room_version"
+    api "androidx.room:room-rxjava2:$room_version"
+    api "androidx.room:room-guava:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    //testImplementation "androidx.room:room-testing:$room_version"
+    /* -- end room -- */
+
+    /* -- begin work -- */
+    // Des:Java only
+    //api "androidx.work:work-runtime:$work_version"
+    // Des:Kotlin + coroutines
+    api "androidx.work:work-runtime-ktx:$work_version"
+    // Des:optional - RxJava2 support
+    api "androidx.work:work-rxjava2:$work_version"
+    // Des:optional - GCMNetworkManager support
+    api "androidx.work:work-gcm:$work_version"
+    // Des:optional - Test helpers
+    //androidTestImplementation "androidx.work:work-testing:$work_version"
+    /* -- end work -- */
+
+    /* -- begin navigation -- */
+    api "androidx.navigation:navigation-runtime-ktx:$navigation_version"
+    api "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    api "androidx.navigation:navigation-ui-ktx:$navigation_version"
+    /* -- end navigation -- */
+
+    /* -- begin paging -- */
+    api "androidx.paging:paging-runtime-ktx:$paging_version"
+    api "androidx.paging:paging-rxjava2-ktx:$paging_version"
+    //testImplementation "androidx.paging:paging-common-ktx:$paging_version"
+    // Des:paging
+    //api "androidx.paging:paging-runtime:$paging_version"
+    // Des:optional - RxJava support
+    //api "androidx.paging:paging-rxjava2:$paging_version"
+    // Des:alternatively - without Android dependencies for testing
+    //testImplementation "androidx.paging:paging-common:$paging_version"
+    /* -- end paging -- */
+
+
+    /** *
+     *  log
+     */
+    api 'com.orhanobut:logger:2.2.0'
+    //    api 'com.github.zhaokaiqiang.klog:library:1.6.0'
+
+
+    /**
+     * view
+     */
+    // Des:RecyclerViewAdapter优化库  Ps:需要添加仓库:maven { url "https://jitpack.io" },3.x版本仅支持androidx;
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.3'
+    //    api 'com.github.chrisbanes:PhotoView:2.0.0'
+    //    api 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    //    api 'com.youth.banner:banner:1.4.5'
+
+
+    /**
+     *  permissions(动态权限)
+     */
+    // Ps:需要添加仓库:maven { url "https://jitpack.io" };会自动导入"rxjava2:2.1.16"(好像不会自动导入了)
+    api 'com.github.tbruyelle:rxpermissions:0.10.2'
+
+
+    /**
+     *  event processing(异步事件)
+     */
+    /* -- begin Rxjava -- */
+    api "io.reactivex.rxjava2:rxjava:2.2.15"
+    api 'io.reactivex.rxjava2:rxkotlin:2.4.0'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    /* -- end Rxjava -- */
+
+    /* -- begin RxLifecycle -- Des:控制rxjava的生命周期防内存泄露 */
+    api 'com.trello.rxlifecycle3:rxlifecycle:3.1.0'
+    api 'com.trello.rxlifecycle3:rxlifecycle-android:3.1.0'
+    api 'com.trello.rxlifecycle3:rxlifecycle-components:3.1.0'
+    /* -- end RxLifecycle --  */
+
+    //    api 'org.greenrobot:eventbus:3.1.1'
+    // Des:基于Hermes和EventBus支持进程间收发事件的库 Ps:不与EventBus同用
+    api 'xiaofei.library:hermes-eventbus:0.3.0'
+
+
+    /**
+     * picture(图片加载框架)
+     */
+    /* -- begin Glide -- Ps:4.x版本kotlin需要添加插件 apply plugin: 'kotlin-kapt'  */
+    //    api 'com.github.bumptech.glide:glide:3.8.0'
+    api 'com.github.bumptech.glide:glide:4.11.0'
+    api 'com.github.bumptech.glide:okhttp3-integration:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0' //
+    /* -- end Glide --  */
+
+
+    /**
+     * net & converter（网络访问框架及数据转换框架)
+     */
+    /* -- begin Okhttp -- */
+    //    api 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    /* -- end Okhttp -- */
+
+    /* -- begin Retrofit -- Ps:2.6.2最低兼容java8、android21,使用okhttp3.14 */
+    api 'com.squareup.retrofit2:converter-gson:2.8.1'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.8.1'
+    /* -- end Retrofit -- */
+
+    /* -- begin Okgo -- */
+    // Ps:会自动导入"okhttp 3.8.1"、"okio 1.13.0"
+    //    api 'com.lzy.net:okgo:3.0.4'
+    /* -- end Okgo -- */
+
+    // Des:xml解析
+    //    api 'org.jsoup:jsoup:1.10.2'
+
+
+    /**
+     * AOP(切面框架)
+     */
+    /* -- begin Dagger -- Ps:kotlin需要添加插件 apply plugin: 'kotlin-kapt'  */
+    //    api 'com.google.dagger:dagger:2.13'//用于构造方法注入
+    //    kapt 'com.google.dagger:dagger-compiler:2.13'
+    /* -- end Dagger -- */
+
+    // Des:切面注入
+    //    api 'org.aspectj:aspectjrt:1.9.4'
+
+
+    /**
+     * processor(注解处理器)
+     */
+    /* -- begin Auto-service -- Des:注册自定义注解处理器 Ps:用于Java Lib 注解处理器模块*/
+    //    compileOnly 'com.google.auto.service:auto-service:1.0-rc6'
+    //    kapt 'com.google.auto.service:auto-service:1.0-rc6'
+    /* -- end Auto-service -- */
+
+    // Des:提供java/kotlin文件格式来代替直接以string的方式写java文件 Ps:用于Java/kotlin Lib 注解处理器模块
+    //    api 'com.squareup:javapoet:1.12.1'
+    //    api 'com.squareup:kotlinpoet:1.5.0'
+
+
+    /**
+     * 性能分析
+     */
+    // Des:内存泄露检测
+    //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-3'
+
+
+    /**
+     * 插件开发
+     */
+    //implementation gradleApi()
+}
+
+/*
+tasks.withType(JavaCompile) { //此项设置可以解决控制台输出日志中的中文乱码问题
+    options.encoding = "UTF-8"
+}*/
