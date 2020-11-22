@@ -3,20 +3,21 @@
 buildscript {
     ext {
         /*gradle版本号配置*/
-        kotlin_version = '1.3.72'
-        compileSdk_version = 29
-        buildTools_version = '29.0.3'
-        minSdk_version = 23
-        targetSdk_version = 29
-        version_code = 1
-        version_name = "1.0"
+        mCompileSdk_version = 30
+        mBuildTools_version = '30.0.2'
+        mMinSdk_version = 19
+        mTargetSdk_version = 30
+        mCode_version = 1
+        mName_Version = "1.0"
+        /*kotlin版本号配置*/
+        kotlin_version = '1.4.10'
         /*测试依赖版本号配置*/
-        test_junit_version ='4.13'
-        test_ext_version ='1.1.1'
-        test_espresso_version ='3.2.0'
+        mTest_junit_version ='4.13.1'
+        mTest_ext_version ='1.1.2'
+        mTest_espresso_version ='3.3.0'
     }
     repositories {//此处仓库是配置gradle脚本执行所需要的依赖
-        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }// 这个是用来下gradle插件的
+//        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }// 这个是用来下gradle插件的
 //        maven { url 'https://maven.aliyun.com/repository/google' }//google()的阿里代理仓库
 //        maven { url 'https://maven.aliyun.com/repository/public' }//jcenter()的阿里代理仓库
         google()
@@ -24,7 +25,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.0'
+        classpath 'com.android.tools.build:gradle:4.1.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

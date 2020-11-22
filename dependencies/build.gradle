@@ -4,14 +4,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion compileSdk_version
-    buildToolsVersion buildTools_version
+    compileSdkVersion mCompileSdk_version
+    buildToolsVersion mBuildTools_version
 
     defaultConfig {
-        minSdkVersion minSdk_version
-        targetSdkVersion targetSdk_version
-        versionCode version_code
-        versionName version_name
+        minSdkVersion mMinSdk_version
+        targetSdkVersion mTargetSdk_version
+        versionCode mCode_version
+        versionName mName_Version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -31,8 +31,8 @@ ext {
     /* -- begin JetPack -- */
     lifecycle_version = "2.2.0"
     room_version = "2.2.5"
-    work_version = "2.3.4"
-    navigation_version = "2.2.2"
+    work_version = "2.4.0"
+    navigation_version = "2.3.1"
     paging_version = "2.1.2"
     arch_version = "2.1.0"
     /* -- end JetPack -- */
@@ -45,9 +45,9 @@ dependencies {
     /**
      * test
      */
-    testImplementation "junit:junit:$test_junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$test_ext_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$test_espresso_version"
+    testImplementation "junit:junit:$mTest_junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$mTest_ext_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$mTest_espresso_version"
 
 
     /**
@@ -64,7 +64,7 @@ dependencies {
     // Ps:anko-layout只依赖到support 27 会跟28有冲突.一般不写dsl,只用anko-commons库就行。所以不用引用全部的anko库
     //    api "org.jetbrains.anko:anko:$anko_version"
     // Des:anko优化的一些通用功能库
-    api "org.jetbrains.anko:anko-commons:$anko_version"
+    //api "org.jetbrains.anko:anko-commons:$anko_version"
 
 
     /**
@@ -72,20 +72,20 @@ dependencies {
      */
     // Ps:会自动导入"swiperefreshlayout:1.0.0"
     api 'androidx.legacy:legacy-support-v4:1.0.0'
-    api 'androidx.appcompat:appcompat:1.1.0'
-    api 'androidx.constraintlayout:constraintlayout:1.1.3'
+    api 'androidx.appcompat:appcompat:1.2.0'
+    api 'androidx.constraintlayout:constraintlayout:2.0.4'
     api 'androidx.recyclerview:recyclerview:1.1.0'
     //api 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
     api 'androidx.viewpager2:viewpager2:1.0.0'
-    api 'com.google.android.material:material:1.1.0'
+    api 'com.google.android.material:material:1.2.1'
 
     /* -- begin ktx ex JetPack-- */
-    api 'androidx.core:core-ktx:1.2.0'
+    api 'androidx.core:core-ktx:1.3.2'
     api "androidx.collection:collection-ktx:1.1.0"
-    api 'androidx.fragment:fragment-ktx:1.2.4'
+    api 'androidx.fragment:fragment-ktx:1.2.5'
     api "androidx.palette:palette-ktx:1.0.0"
     api "androidx.sqlite:sqlite-ktx:2.1.0"
-    api 'com.google.android.play:core-ktx:1.7.0'
+    api 'com.google.android.play:core-ktx:1.8.1'
     /* -- end ktx ex JetPack-- */
 
     /* -- begin lifecycle -- */
@@ -100,7 +100,7 @@ dependencies {
     // Des:optional - ProcessLifecycleOwner provides a lifecycle for the whole application process
     api "androidx.lifecycle:lifecycle-process:$lifecycle_version"
     // Des:Annotation processor
-    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    //kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     // Des:alternately - if using Java8, use the following instead of lifecycle-compiler
     api "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     // Des:optional - Test helpers for LiveData
@@ -159,7 +159,7 @@ dependencies {
      * view
      */
     // Des:RecyclerViewAdapter优化库  Ps:需要添加仓库:maven { url "https://jitpack.io" },3.x版本仅支持androidx;
-    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.3'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
     //    api 'com.github.chrisbanes:PhotoView:2.0.0'
     //    api 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     //    api 'com.youth.banner:banner:1.4.5'
@@ -176,20 +176,20 @@ dependencies {
      *  event processing(异步事件)
      */
     /* -- begin Rxjava -- */
-    api "io.reactivex.rxjava2:rxjava:2.2.15"
-    api 'io.reactivex.rxjava2:rxkotlin:2.4.0'
-    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api "io.reactivex.rxjava2:rxjava:3.0.7"
+    api 'io.reactivex.rxjava2:rxkotlin:3.0.1'
+    api 'io.reactivex.rxjava2:rxandroid:3.0.0'
     /* -- end Rxjava -- */
 
     /* -- begin RxLifecycle -- Des:控制rxjava的生命周期防内存泄露 */
-    api 'com.trello.rxlifecycle3:rxlifecycle:3.1.0'
-    api 'com.trello.rxlifecycle3:rxlifecycle-android:3.1.0'
-    api 'com.trello.rxlifecycle3:rxlifecycle-components:3.1.0'
+    //api 'com.trello.rxlifecycle3:rxlifecycle:3.1.0'
+    //api 'com.trello.rxlifecycle3:rxlifecycle-android:3.1.0'
+    //api 'com.trello.rxlifecycle3:rxlifecycle-components:3.1.0'
     /* -- end RxLifecycle --  */
 
     //    api 'org.greenrobot:eventbus:3.1.1'
     // Des:基于Hermes和EventBus支持进程间收发事件的库 Ps:不与EventBus同用
-    api 'xiaofei.library:hermes-eventbus:0.3.0'
+    //api 'xiaofei.library:hermes-eventbus:0.3.0'
 
 
     /**
@@ -211,8 +211,8 @@ dependencies {
     /* -- end Okhttp -- */
 
     /* -- begin Retrofit -- Ps:2.6.2最低兼容java8、android21,使用okhttp3.14 */
-    api 'com.squareup.retrofit2:converter-gson:2.8.1'
-    api 'com.squareup.retrofit2:adapter-rxjava2:2.8.1'
+    api 'com.squareup.retrofit2:converter-gson:2.9.0'
+    api 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
     /* -- end Retrofit -- */
 
     /* -- begin Okgo -- */

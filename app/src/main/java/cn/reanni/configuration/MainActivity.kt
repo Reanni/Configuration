@@ -11,9 +11,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         tv.setOnClickListener(this)
+        //startActivity<MainActivity>()
     }
 
-    override fun onClick(v: View?) {
-        TODO("Not yet implemented")
-    }
+    override fun onClick(v: View) {}
 }

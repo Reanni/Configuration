@@ -3,15 +3,15 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion compileSdk_version
-    buildToolsVersion buildTools_version
+    compileSdkVersion mCompileSdk_version
+    buildToolsVersion mBuildTools_version
 
     defaultConfig {
         applicationId "cn.reanni.configuration"
-        minSdkVersion minSdk_version
-        targetSdkVersion targetSdk_version
-        versionCode version_code
-        versionName version_name
+        minSdkVersion mMinSdk_version
+        targetSdkVersion mTargetSdk_version
+        versionCode mCode_version
+        versionName mName_Version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -29,9 +29,9 @@ dependencies {
     /**
      * test
      */
-    testImplementation "junit:junit:$test_junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$test_ext_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$test_espresso_version"
+    testImplementation "junit:junit:$mTest_junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$mTest_ext_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$mTest_espresso_version"
 
     /**
      * modules
