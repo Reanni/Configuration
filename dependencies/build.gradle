@@ -110,7 +110,7 @@ dependencies {
     /* -- begin room -- */
     api "androidx.room:room-ktx:$room_version"
     api "androidx.room:room-runtime:$room_version"
-    api "androidx.room:room-rxjava2:$room_version"
+    //api "androidx.room:room-rxjava2:$room_version"
     api "androidx.room:room-guava:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     //testImplementation "androidx.room:room-testing:$room_version"
@@ -122,7 +122,7 @@ dependencies {
     // Des:Kotlin + coroutines
     api "androidx.work:work-runtime-ktx:$work_version"
     // Des:optional - RxJava2 support
-    api "androidx.work:work-rxjava2:$work_version"
+    //api "androidx.work:work-rxjava2:$work_version"
     // Des:optional - GCMNetworkManager support
     api "androidx.work:work-gcm:$work_version"
     // Des:optional - Test helpers
@@ -137,7 +137,7 @@ dependencies {
 
     /* -- begin paging -- */
     api "androidx.paging:paging-runtime-ktx:$paging_version"
-    api "androidx.paging:paging-rxjava2-ktx:$paging_version"
+    //api "androidx.paging:paging-rxjava2-ktx:$paging_version"
     //testImplementation "androidx.paging:paging-common-ktx:$paging_version"
     // Des:paging
     //api "androidx.paging:paging-runtime:$paging_version"
@@ -169,16 +169,16 @@ dependencies {
      *  permissions(动态权限)
      */
     // Ps:需要添加仓库:maven { url "https://jitpack.io" };会自动导入"rxjava2:2.1.16"(好像不会自动导入了)
-    api 'com.github.tbruyelle:rxpermissions:0.10.2'
+    api 'com.github.tbruyelle:rxpermissions:0.12'
 
 
     /**
      *  event processing(异步事件)
      */
     /* -- begin Rxjava -- */
-    api "io.reactivex.rxjava2:rxjava:3.0.7"
-    api 'io.reactivex.rxjava2:rxkotlin:3.0.1'
-    api 'io.reactivex.rxjava2:rxandroid:3.0.0'
+    api "io.reactivex.rxjava3:rxjava:3.0.7"
+    api 'io.reactivex.rxjava3:rxkotlin:3.0.1'
+    api 'io.reactivex.rxjava3:rxandroid:3.0.0'
     /* -- end Rxjava -- */
 
     /* -- begin RxLifecycle -- Des:控制rxjava的生命周期防内存泄露 */
@@ -204,10 +204,21 @@ dependencies {
 
 
     /**
+     *  (序列化)
+     */
+    api 'com.google.code.gson:gson:2.8.6'
+    api 'com.tencent:mmkv-static:1.2.5'
+
+    // Des:xml解析
+    //    api 'org.jsoup:jsoup:1.10.2'
+
+
+    /**
      * net & converter（网络访问框架及数据转换框架)
      */
     /* -- begin Okhttp -- */
-    //    api 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    api "com.squareup.okhttp3:okhttp:4.9.0"
+    api 'com.squareup.okhttp3:logging-interceptor:4.9.0'
     /* -- end Okhttp -- */
 
     /* -- begin Retrofit -- Ps:2.6.2最低兼容java8、android21,使用okhttp3.14 */
@@ -219,9 +230,6 @@ dependencies {
     // Ps:会自动导入"okhttp 3.8.1"、"okio 1.13.0"
     //    api 'com.lzy.net:okgo:3.0.4'
     /* -- end Okgo -- */
-
-    // Des:xml解析
-    //    api 'org.jsoup:jsoup:1.10.2'
 
 
     /**
